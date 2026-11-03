@@ -307,27 +307,106 @@ style="width:280px;max-width:85%;height:auto;margin-bottom:12px;"><h1>EastPoint 
 </section>
 
 <section id="lost" class="card hidden">
-<h2>Lost & Found Portal</h2>
-<label>Item name</label>
-<input id="item" placeholder="Example: College ID card">
-<label>Category</label>
-<select id="category">
-<option>Books and Notes</option>
-<option>ID Card</option>
-<option>Electronics</option>
-<option>Water Bottle</option>
-<option>Other</option>
-</select>
-<label>Location</label>
-<input id="location" placeholder="Where was it lost or found?">
-<label>Type</label>
-<select id="type">
-<option>Lost</option>
-<option>Found</option>
-</select>
-<button onclick="addItem()">Post Item</button>
-<h3>Recent Reports</h3>
-<div id="items"></div>
+
+  <div style="margin-bottom:25px;">
+    <p style="color:#70aaff;letter-spacing:3px;font-size:12px;">
+      EAST POINT STUDENT COMMUNITY
+    </p>
+    <h2 style="font-size:30px;">Lost & Found Hub</h2>
+    <p style="color:#b8c9e5;">
+      Lost something? Found something? Help reunite it with its owner.
+    </p>
+  </div>
+
+  <!-- DASHBOARD -->
+  <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:25px;">
+
+    <div style="flex:1;min-width:100px;background:#1b2e4e;padding:16px;border-radius:14px;">
+      <h2 id="lf-total">0</h2>
+      <p style="color:#b8c9e5;">Total reports</p>
+    </div>
+
+    <div style="flex:1;min-width:100px;background:#1b2e4e;padding:16px;border-radius:14px;">
+      <h2 id="lf-active" style="color:#70aaff;">0</h2>
+      <p style="color:#b8c9e5;">Active items</p>
+    </div>
+
+    <div style="flex:1;min-width:100px;background:#1b2e4e;padding:16px;border-radius:14px;">
+      <h2 id="lf-returned" style="color:#4ade80;">0</h2>
+      <p style="color:#b8c9e5;">Returned</p>
+    </div>
+
+  </div>
+
+  <!-- REPORT FORM -->
+  <div style="background:#1b2e4e;padding:20px;border-radius:16px;">
+
+    <h3>＋ Report an Item</h3>
+
+    <label>Item name</label>
+    <input id="lf-name" placeholder="Example: College ID card">
+
+    <label>Category</label>
+    <select id="lf-category">
+      <option>Books and Notes</option>
+      <option>ID Card</option>
+      <option>Electronics</option>
+      <option>Water Bottle</option>
+      <option>Clothing</option>
+      <option>Keys</option>
+      <option>Other</option>
+    </select>
+
+    <label>Location</label>
+    <input id="lf-location" placeholder="Where was it lost or found?">
+
+    <label>Report type</label>
+    <select id="lf-type">
+      <option value="Lost">Lost</option>
+      <option value="Found">Found</option>
+    </select>
+
+    <label>Contact number or email</label>
+    <input id="lf-contact" placeholder="Your contact details">
+
+    <label>Upload item photo</label>
+    <input id="lf-photo" type="file" accept="image/*"
+      onchange="previewLostPhoto()">
+
+    <img id="lf-preview"
+      style="display:none;width:100%;max-height:220px;object-fit:contain;margin-top:12px;border-radius:12px;">
+
+    <button onclick="addLostItem()" style="width:100%;margin-top:20px;">
+      POST REPORT →
+    </button>
+
+  </div>
+
+  <!-- SEARCH -->
+  <div style="margin-top:30px;">
+
+    <h3>Explore Reports</h3>
+
+    <input id="lf-search"
+      placeholder="🔍 Search items..."
+      oninput="renderLostItems()">
+
+    <select id="lf-filter" onchange="renderLostItems()">
+      <option value="All">All reports</option>
+      <option value="Lost">Lost items</option>
+      <option value="Found">Found items</option>
+      <option value="Returned">Returned items</option>
+    </select>
+
+    <div id="lf-items" style="margin-top:20px;"></div>
+
+  </div>
+
+  <p style="font-size:12px;color:#9aaecb;margin-top:25px;">
+    Student-run independent project. Contact details are visible to
+    visitors of this device. Do not upload sensitive personal information.
+  </p>
+
 </section>
 </main>
 <script>
@@ -376,18 +455,203 @@ function calculate(){
       '</div>';
   }
 }
-function addItem(){
-let name=document.getElementById('item').value.trim();
-let category=document.getElementById('category').value;
-let location=document.getElementById('location').value.trim();
-let type=document.getElementById('type').value;
-if(!name||!location){alert('Please enter item name and location.');return;}
-let div=document.createElement('div');
-div.className='item';
-div.textContent=type+' | '+name+' | '+category+' | '+location;
-document.getElementById('items').prepend(div);
-document.getElementById('item').value='';
-document.getElementById('location').value='';
+let lostPhotoData = '';
+
+function previewLostPhoto() {
+  const file = document.getElementById('lf-photo').files[0];
+  const preview = document.getElementById('lf-preview');
+
+  lostPhotoData = '';
+  preview.style.display = 'none';
+
+  if (!file) return;
+
+  if (!file.type.startsWith('image/')) {
+    alert('Please select an image.');
+    return;
+  }
+
+  const reader = new FileReader();
+
+  reader.onload = function(e) {
+    const img = new Image();
+
+    img.onload = function() {
+      const canvas = document.createElement('canvas');
+      const scale = Math.min(1, 800 / img.width, 800 / img.height);
+
+      canvas.width = img.width * scale;
+      canvas.height = img.height * scale;
+
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+      lostPhotoData = canvas.toDataURL('image/jpeg', 0.65);
+      preview.src = lostPhotoData;
+      preview.style.display = 'block';
+    };
+
+    img.src = e.target.result;
+  };
+
+  reader.readAsDataURL(file);
+}
+
+function getLostItems() {
+  try {
+    return JSON.parse(localStorage.getItem('campusLostItems')) || [];
+  } catch (e) {
+    return [];
+  }
+}
+
+function saveLostItems(items) {
+  try {
+    localStorage.setItem('campusLostItems', JSON.stringify(items));
+    return true;
+  } catch (e) {
+    alert('Storage is full. Try removing some old reports or photos.');
+    return false;
+  }
+}
+
+function addLostItem() {
+  const name = document.getElementById('lf-name').value.trim();
+  const category = document.getElementById('lf-category').value;
+  const location = document.getElementById('lf-location').value.trim();
+  const type = document.getElementById('lf-type').value;
+  const contact = document.getElementById('lf-contact').value.trim();
+
+  if (!name || !location || !contact) {
+    alert('Please enter item name, location and contact details.');
+    return;
+  }
+
+  const items = getLostItems();
+
+  const item = {
+    id: Date.now(),
+    name: name,
+    category: category,
+    location: location,
+    type: type,
+    contact: contact,
+    photo: lostPhotoData,
+    date: new Date().toISOString(),
+    returned: false
+  };
+
+  items.unshift(item);
+
+  if (!saveLostItems(items)) return;
+
+  document.getElementById('lf-name').value = '';
+  document.getElementById('lf-location').value = '';
+  document.getElementById('lf-contact').value = '';
+  document.getElementById('lf-photo').value = '';
+  document.getElementById('lf-preview').style.display = 'none';
+
+  lostPhotoData = '';
+
+  renderLostItems();
+  alert('Your report has been posted successfully!');
+}
+
+function markLostReturned(id) {
+  const items = getLostItems();
+  const item = items.find(x => x.id === id);
+
+  if (!item) return;
+
+  item.returned = true;
+
+  if (saveLostItems(items)) {
+    renderLostItems();
+  }
+}
+
+function renderLostItems() {
+  const items = getLostItems();
+  const container = document.getElementById('lf-items');
+  const search = document.getElementById('lf-search').value.toLowerCase();
+  const filter = document.getElementById('lf-filter').value;
+
+  container.innerHTML = '';
+
+  const filtered = items.filter(item => {
+    const matchesSearch =
+      (item.name + ' ' + item.category + ' ' + item.location)
+      .toLowerCase().includes(search);
+
+    const matchesFilter =
+      filter === 'All' ||
+      (filter === 'Returned' && item.returned) ||
+      (filter === item.type && !item.returned);
+
+    return matchesSearch && matchesFilter;
+  });
+
+  if (filtered.length === 0) {
+    container.textContent = 'No reports found.';
+  }
+
+  filtered.forEach(item => {
+    const card = document.createElement('div');
+
+    card.style.cssText =
+      'background:#1b2e4e;padding:18px;margin-bottom:15px;border-radius:15px;';
+
+    if (item.photo) {
+      const image = document.createElement('img');
+      image.src = item.photo;
+      image.style.cssText =
+        'width:100%;max-height:200px;object-fit:contain;border-radius:10px;margin-bottom:12px;';
+      card.appendChild(image);
+    }
+
+    const title = document.createElement('h3');
+    title.textContent = item.name;
+    card.appendChild(title);
+
+    const status = document.createElement('p');
+    status.style.color = item.returned ? '#4ade80' : '#70aaff';
+    status.textContent = item.returned
+      ? 'RETURNED'
+      : item.type.toUpperCase();
+    card.appendChild(status);
+
+    const details = document.createElement('p');
+    details.textContent =
+      item.category + ' • ' + item.location;
+    card.appendChild(details);
+
+    const date = document.createElement('p');
+    date.style.color = '#b8c9e5';
+    date.textContent =
+      'Reported: ' + new Date(item.date).toLocaleDateString();
+    card.appendChild(date);
+
+    const contact = document.createElement('p');
+    contact.textContent = 'Contact: ' + item.contact;
+    card.appendChild(contact);
+
+    if (!item.returned) {
+      const button = document.createElement('button');
+      button.textContent = 'MARK AS RETURNED';
+      button.onclick = () => markLostReturned(item.id);
+      card.appendChild(button);
+    }
+
+    container.appendChild(card);
+  });
+
+  document.getElementById('lf-total').textContent = items.length;
+
+  document.getElementById('lf-active').textContent =
+    items.filter(x => !x.returned).length;
+
+  document.getElementById('lf-returned').textContent =
+    items.filter(x => x.returned).length;
 }
 function closeIntro() {
   const intro = document.getElementById('intro-screen');
