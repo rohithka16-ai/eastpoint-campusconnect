@@ -279,7 +279,65 @@ style="width:280px;max-width:85%;height:auto;margin-bottom:12px;"><h1>EastPoint 
         <p>Report lost items and discover found items.</p>
         <button onclick="show('lost')">OPEN LOST & FOUND →</button>
       </div>
+<div style="flex:1;min-width:210px;padding:20px;border-radius:15px;background:#1b2e4e;">
+<h3>🗓️ Smart Timetable</h3>
+<p>Organise your weekly class schedule.</p>
+<button onclick="show('timetable')">OPEN TIMETABLE →</button>
+</div>
 
+<div style="flex:1;min-width:210px;padding:20px;border-radius:15px;background:#1b2e4e;">
+<h3>📝 Assignment Tracker</h3>
+<p>Manage assignments and deadlines.</p>
+<button onclick="show('assignments')">OPEN TRACKER →</button>
+</div>
+
+<div style="flex:1;min-width:210px;padding:20px;border-radius:15px;background:#1b2e4e;">
+<h3>📚 Notes Hub</h3>
+<p>Save subject notes and study links.</p>
+<button onclick="show('notes')">OPEN NOTES →</button>
+</div>
+
+<div style="flex:1;min-width:210px;padding:20px;border-radius:15px;background:#1b2e4e;">
+<h3>🎓 SGPA Calculator</h3>
+<p>Calculate your semester grade points.</p>
+<button onclick="show('cgpa')">CALCULATE →</button>
+</div>
+
+<div style="flex:1;min-width:210px;padding:20px;border-radius:15px;background:#1b2e4e;">
+<h3>📢 Notice Board</h3>
+<p>Campus announcements and updates.</p>
+<button onclick="show('notices')">VIEW NOTICES →</button>
+</div>
+
+<div style="flex:1;min-width:210px;padding:20px;border-radius:15px;background:#1b2e4e;">
+<h3>🎉 Events & Clubs</h3>
+<p>Keep track of campus events.</p>
+<button onclick="show('events')">EXPLORE →</button>
+</div>
+
+<div style="flex:1;min-width:210px;padding:20px;border-radius:15px;background:#1b2e4e;">
+<h3>📍 Campus Map</h3>
+<p>Find your way to the college.</p>
+<button onclick="show('campus-map')">OPEN MAP →</button>
+</div>
+
+<div style="flex:1;min-width:210px;padding:20px;border-radius:15px;background:#1b2e4e;">
+<h3>🚌 Transport Guide</h3>
+<p>Plan your journey to campus.</p>
+<button onclick="show('transport')">PLAN JOURNEY →</button>
+</div>
+
+<div style="flex:1;min-width:210px;padding:20px;border-radius:15px;background:#1b2e4e;">
+<h3>🤖 AI Study Assistant</h3>
+<p>Your future learning companion.</p>
+<button onclick="show('ai-study')">OPEN ASSISTANT →</button>
+</div>
+
+<div style="flex:1;min-width:210px;padding:20px;border-radius:15px;background:#1b2e4e;">
+<h3>💬 Student Feedback</h3>
+<p>Share suggestions and ideas.</p>
+<button onclick="show('feedback')">GIVE FEEDBACK →</button>
+</div>
     </div>
 
     <p style="margin-top:25px;font-size:12px;color:#9aaecb;">
@@ -411,6 +469,122 @@ style="width:280px;max-width:85%;height:auto;margin-bottom:12px;"><h1>EastPoint 
   </p>
 
 </section>
+  
+<section id="timetable" class="card hidden">
+<h2>🗓️ Smart Timetable</h2>
+<p>Organise your weekly class schedule.</p>
+<label>Day</label>
+<select id="tt-day">
+<option>Monday</option><option>Tuesday</option>
+<option>Wednesday</option><option>Thursday</option>
+<option>Friday</option><option>Saturday</option>
+</select>
+<label>Subject</label>
+<input id="tt-subject" placeholder="Subject name">
+<label>Class time</label>
+<input id="tt-time" type="time">
+<label>Room</label>
+<input id="tt-room" placeholder="Room number">
+<button onclick="addTimetable()">ADD CLASS</button>
+<div id="tt-list"></div>
+</section>
+
+<section id="assignments" class="card hidden">
+<h2>📝 Assignment Tracker</h2>
+<label>Assignment name</label>
+<input id="as-name" placeholder="Assignment">
+<label>Subject</label>
+<input id="as-subject" placeholder="Subject">
+<label>Due date</label>
+<input id="as-date" type="date">
+<button onclick="addAssignment()">ADD ASSIGNMENT</button>
+<div id="as-list"></div>
+</section>
+
+<section id="notes" class="card hidden">
+<h2>📚 Notes Hub</h2>
+<label>Resource name</label>
+<input id="nt-name" placeholder="Notes or question paper">
+<label>Subject</label>
+<input id="nt-subject" placeholder="Subject">
+<label>Resource link</label>
+<input id="nt-link" type="url" placeholder="https://...">
+<button onclick="addNote()">SAVE RESOURCE</button>
+<div id="nt-list"></div>
+</section>
+
+<section id="cgpa" class="card hidden">
+<h2>🎓 SGPA Calculator</h2>
+<label>Subject</label>
+<input id="sg-subject" placeholder="Subject name">
+<label>Credits</label>
+<input id="sg-credit" type="number" min="0.5" step="0.5">
+<label>Grade point (0–10)</label>
+<input id="sg-point" type="number" min="0" max="10" step="0.1">
+<button onclick="addGrade()">ADD SUBJECT</button>
+<div id="sg-list"></div>
+<button onclick="calculateSGPA()">CALCULATE SGPA</button>
+<h3 id="sg-result">SGPA: —</h3>
+</section>
+
+<section id="notices" class="card hidden">
+<h2>📢 Notice Board</h2>
+<p>Campus announcements and academic updates.</p>
+<div class="feature-panel">
+<strong>Notice feed coming soon.</strong>
+<p>Official college notices will require a verified information source.</p>
+</div>
+</section>
+
+<section id="events" class="card hidden">
+<h2>🎉 Events & Clubs</h2>
+<label>Event name</label>
+<input id="ev-name" placeholder="Event name">
+<label>Event date</label>
+<input id="ev-date" type="date">
+<label>Venue</label>
+<input id="ev-venue" placeholder="Venue">
+<button onclick="addEvent()">SAVE EVENT</button>
+<div id="ev-list"></div>
+</section>
+
+<section id="campus-map" class="card hidden">
+<h2>📍 Campus Map</h2>
+<p>Find East Point College of Engineering and Technology.</p>
+<button onclick="window.open('https://www.google.com/maps/search/?api=1&query=East+Point+College+of+Engineering+and+Technology+Bengaluru','_blank')">OPEN GOOGLE MAPS</button>
+</section>
+
+<section id="transport" class="card hidden">
+<h2>🚌 Transport Guide</h2>
+<label>Starting location</label>
+<input id="bus-origin" placeholder="Enter your bus stop">
+<button onclick="openTransport()">FIND ROUTE</button>
+</section>
+
+<section id="ai-study" class="card hidden">
+<h2>🤖 AI Study Assistant</h2>
+<p>Your future learning companion.</p>
+<div class="feature-panel">
+<strong>AI connection coming soon.</strong>
+<p>A secure backend is required before enabling AI chat.</p>
+</div>
+</section>
+
+<section id="feedback" class="card hidden">
+<h2>💬 Student Feedback</h2>
+<label>Feedback category</label>
+<select id="fb-category">
+<option>Website suggestion</option>
+<option>Website issue</option>
+<option>Campus facility</option>
+<option>Other</option>
+</select>
+<label>Your feedback</label>
+<textarea id="fb-message" rows="5" placeholder="Write your suggestion..."></textarea>
+<button onclick="copyFeedback()">COPY FEEDBACK</button>
+<p id="fb-result"></p>
+</section>
+
 </main>
 <script>
 function show(id){
@@ -668,6 +842,246 @@ function closeIntro() {
   }
 }
 
-setTimeout(closeIntro, 3000);</script>
+setTimeout(closeIntro, 3000);
+
+// CAMPUSCONNECT NEW FEATURES
+
+function featureRead(key) {
+  try {
+    return JSON.parse(localStorage.getItem(key)) || [];
+  } catch (e) {
+    return [];
+  }
+}
+
+function featureSave(key, data) {
+  localStorage.setItem(key, JSON.stringify(data));
+}
+
+function featureRender(key, listId, formatter) {
+  const list = document.getElementById(listId);
+  if (!list) return;
+
+  list.innerHTML = "";
+  featureRead(key).forEach(item => {
+    const row = document.createElement("div");
+    row.className = "item";
+    row.textContent = formatter(item);
+    list.appendChild(row);
+  });
+}
+
+// SMART TIMETABLE
+function addTimetable() {
+  const day = document.getElementById("tt-day").value;
+  const subject = document.getElementById("tt-subject").value.trim();
+  const time = document.getElementById("tt-time").value;
+  const room = document.getElementById("tt-room").value.trim();
+
+  if (!subject || !time) {
+    alert("Enter subject and class time");
+    return;
+  }
+
+  const data = featureRead("cc-timetable");
+  data.push({day, subject, time, room});
+  featureSave("cc-timetable", data);
+
+  document.getElementById("tt-subject").value = "";
+  document.getElementById("tt-time").value = "";
+  document.getElementById("tt-room").value = "";
+
+  featureRender("cc-timetable", "tt-list",
+    x => `${x.day} | ${x.time} | ${x.subject} | ${x.room}`);
+}
+
+// ASSIGNMENT TRACKER
+function addAssignment() {
+  const name = document.getElementById("as-name").value.trim();
+  const subject = document.getElementById("as-subject").value.trim();
+  const date = document.getElementById("as-date").value;
+
+  if (!name || !subject || !date) {
+    alert("Fill all assignment details");
+    return;
+  }
+
+  const data = featureRead("cc-assignments");
+  data.push({name, subject, date});
+  featureSave("cc-assignments", data);
+
+  document.getElementById("as-name").value = "";
+  document.getElementById("as-subject").value = "";
+  document.getElementById("as-date").value = "";
+
+  featureRender("cc-assignments", "as-list",
+    x => `${x.name} | ${x.subject} | Due: ${x.date}`);
+}
+
+// NOTES HUB
+function addNote() {
+  const name = document.getElementById("nt-name").value.trim();
+  const subject = document.getElementById("nt-subject").value.trim();
+  const link = document.getElementById("nt-link").value.trim();
+
+  if (!name || !subject || !link) {
+    alert("Fill all resource details");
+    return;
+  }
+
+  try {
+    const url = new URL(link);
+    if (!["https:", "http:"].includes(url.protocol)) throw new Error();
+  } catch (e) {
+    alert("Enter a valid web link");
+    return;
+  }
+
+  const data = featureRead("cc-notes");
+  data.push({name, subject, link});
+  featureSave("cc-notes", data);
+
+  document.getElementById("nt-name").value = "";
+  document.getElementById("nt-subject").value = "";
+  document.getElementById("nt-link").value = "";
+
+  const list = document.getElementById("nt-list");
+  list.innerHTML = "";
+
+  featureRead("cc-notes").forEach(x => {
+    const row = document.createElement("div");
+    row.className = "item";
+
+    const title = document.createElement("p");
+    title.textContent = x.name + " | " + x.subject;
+
+    const link = document.createElement("a");
+    link.textContent = "OPEN RESOURCE";
+    link.href = x.link;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+
+    row.append(title, link);
+    list.appendChild(row);
+  });
+}
+
+// SGPA CALCULATOR
+function addGrade() {
+  const subject = document.getElementById("sg-subject").value.trim();
+  const credits = Number(document.getElementById("sg-credit").value);
+  const point = Number(document.getElementById("sg-point").value);
+
+  if (!subject || !Number.isFinite(credits) ||
+      credits <= 0 || !Number.isFinite(point) ||
+      point < 0 || point > 10) {
+    alert("Enter valid subject, credits and grade point");
+    return;
+  }
+
+  const data = featureRead("cc-grades");
+  data.push({subject, credits, point});
+  featureSave("cc-grades", data);
+
+  document.getElementById("sg-subject").value = "";
+  document.getElementById("sg-credit").value = "";
+  document.getElementById("sg-point").value = "";
+
+  featureRender("cc-grades", "sg-list",
+    x => `${x.subject} | Credits: ${x.credits} | Grade: ${x.point}`);
+}
+
+function calculateSGPA() {
+  const data = featureRead("cc-grades");
+
+  if (!data.length) {
+    alert("Add subjects first");
+    return;
+  }
+
+  const credits = data.reduce((sum, x) => sum + x.credits, 0);
+  const points = data.reduce((sum, x) => sum + x.credits * x.point, 0);
+
+  document.getElementById("sg-result").textContent =
+    "SGPA: " + (points / credits).toFixed(2);
+}
+
+// EVENTS & CLUBS
+function addEvent() {
+  const name = document.getElementById("ev-name").value.trim();
+  const date = document.getElementById("ev-date").value;
+  const venue = document.getElementById("ev-venue").value.trim();
+
+  if (!name || !date || !venue) {
+    alert("Fill all event details");
+    return;
+  }
+
+  const data = featureRead("cc-events");
+  data.push({name, date, venue});
+  featureSave("cc-events", data);
+
+  document.getElementById("ev-name").value = "";
+  document.getElementById("ev-date").value = "";
+  document.getElementById("ev-venue").value = "";
+
+  featureRender("cc-events", "ev-list",
+    x => `${x.name} | ${x.date} | ${x.venue}`);
+}
+
+// TRANSPORT GUIDE
+function openTransport() {
+  const origin = document.getElementById("bus-origin").value.trim();
+
+  if (!origin) {
+    alert("Enter your starting location");
+    return;
+  }
+
+  const destination =
+    "East Point College of Engineering and Technology Bengaluru";
+
+  const url = "https://www.google.com/maps/dir/?api=1&origin=" +
+    encodeURIComponent(origin) + "&destination=" +
+    encodeURIComponent(destination) + "&travelmode=transit";
+
+  window.open(url, "_blank");
+}
+
+// STUDENT FEEDBACK
+async function copyFeedback() {
+  const category = document.getElementById("fb-category").value;
+  const message = document.getElementById("fb-message").value.trim();
+
+  if (!message) {
+    alert("Write your feedback first");
+    return;
+  }
+
+  try {
+    await navigator.clipboard.writeText(
+      "Category: " + category + "\nFeedback: " + message
+    );
+    document.getElementById("fb-result").textContent =
+      "Feedback copied! You can now share it.";
+  } catch (e) {
+    document.getElementById("fb-result").textContent =
+      "Clipboard unavailable. Please copy your feedback manually.";
+  }
+}
+
+// RESTORE SAVED FEATURE DATA
+featureRender("cc-timetable", "tt-list",
+  x => `${x.day} | ${x.time} | ${x.subject} | ${x.room}`);
+
+featureRender("cc-assignments", "as-list",
+  x => `${x.name} | ${x.subject} | Due: ${x.date}`);
+
+featureRender("cc-grades", "sg-list",
+  x => `${x.subject} | Credits: ${x.credits} | Grade: ${x.point}`);
+
+featureRender("cc-events", "ev-list",
+  x => `${x.name} | ${x.date} | ${x.venue}`);
+</script>
 </body>
 </html>
