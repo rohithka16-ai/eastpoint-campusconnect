@@ -303,6 +303,7 @@ style="width:280px;max-width:85%;height:auto;margin-bottom:12px;"><h1>EastPoint 
 <input type="number" id="attended" min="0" placeholder="Enter attended classes">
 <button onclick="calculate()">Calculate Attendance</button>
 <h3 id="result"></h3>
+  <div id="recovery-result"></div>
 </section>
 
 <section id="lost" class="card hidden">
@@ -335,14 +336,45 @@ document.querySelectorAll('main section').forEach(s=>s.classList.add('hidden'));
 document.getElementById(id).classList.remove('hidden');
 }
 function calculate(){
-let total=Number(document.getElementById('total').value);
-let attended=Number(document.getElementById('attended').value);
-if(!Number.isInteger(total)||!Number.isInteger(attended)||total<=0||attended<0||attended>total){
-alert('Please enter valid attendance numbers.');
-return;
-}
-let percentage=Math.round(attended/total*100);
-document.getElementById('result').textContent='Attendance: '+percentage+'%';
+
+  let total = Number(document.getElementById('total').value);
+  let attended = Number(document.getElementById('attended').value);
+
+  if (
+    !Number.isInteger(total) ||
+    !Number.isInteger(attended) ||
+    total <= 0 ||
+    attended < 0 ||
+    attended > total
+  ) {
+    alert('Please enter valid attendance numbers.');
+    return;
+  }
+
+  let percentage = Math.round(attended / total * 100);
+
+  document.getElementById('result').textContent =
+    'Your Attendance: ' + percentage + '%';
+
+  let recovery = document.getElementById('recovery-result');
+
+  if (attended / total >= 0.75) {
+
+    recovery.innerHTML =
+      '<h3 style="color:#4ade80;">75% Requirement Achieved!</h3>' +
+      '<p>You meet the attendance requirement.</p>';
+
+  } else {
+
+    let needed = Math.ceil((0.75 * total - attended) / 0.25);
+
+    recovery.innerHTML =
+      '<div style="margin-top:15px;padding:20px;background:#1b2e4e;border-radius:15px;">' +
+      '<h3 style="color:#ffb454;">Attendance Below 75%</h3>' +
+      '<h2 style="color:#70aaff;font-size:32px;">' + needed + ' Classes</h2>' +
+      '<p>Attend these classes consecutively without missing any to reach 75%.</p>' +
+      '</div>';
+  }
 }
 function addItem(){
 let name=document.getElementById('item').value.trim();
