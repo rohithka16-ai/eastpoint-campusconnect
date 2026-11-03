@@ -223,33 +223,69 @@ style="width:280px;max-width:85%;height:auto;margin-bottom:12px;"><h1>EastPoint 
 <button onclick="show('lost')">Lost & Found</button>
 </nav>
 <main>
-<section id="home" class="card">
-  <div style="padding:25px;border-radius:16px;background:linear-gradient(135deg,#142b50,#2563eb);color:white;margin-bottom:20px;">
-    <p style="font-size:12px;letter-spacing:2px;">EAST POINT • STUDENT HUB</p>
-    <h2 style="font-size:28px;">Welcome to CampusConnect 👋</h2>
-    <p>Your campus, your connections, all in one place.</p>
-    <button onclick="show('attendance')">Explore Dashboard →</button>
+<section id="home" class="card" style="padding:0;overflow:hidden;">
+
+  <!-- CINEMATIC HERO -->
+  <div style="position:relative;min-height:470px;display:flex;align-items:flex-end;overflow:hidden;border-radius:18px;background:#061329;">
+
+    <img
+      src="https://epcet.edu.in/wp-content/uploads/2024/03/epcet_home_img6.png"
+      alt="East Point campus students"
+      style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+
+    <div style="position:absolute;inset:0;background:linear-gradient(0deg,#020817 2%,rgba(3,12,30,.85) 40%,rgba(3,12,30,.12) 100%);"></div>
+
+    <div style="position:relative;z-index:2;padding:28px;color:white;">
+      <p style="letter-spacing:4px;font-size:11px;color:#9fc5ff;">
+        EAST POINT • STUDENT HUB
+      </p>
+
+      <h1 style="font-size:clamp(34px,8vw,52px);line-height:1.1;margin:15px 0;">
+        MORE THAN<br>A CAMPUS.
+        <span style="color:#70aaff;">A COMMUNITY.</span>
+      </h1>
+
+      <p style="font-size:15px;color:#d5e2f5;line-height:1.7;">
+        Your campus. Your connections. Your journey starts here.
+      </p>
+
+      <button onclick="document.getElementById('campus-services').scrollIntoView({behavior:'smooth'})"
+        style="margin-top:20px;">
+        EXPLORE CAMPUS →
+      </button>
+    </div>
   </div>
 
-  <h2>Campus Services</h2>
+  <!-- CAMPUS SERVICES -->
+  <div id="campus-services" style="padding:24px 5px;">
 
-  <div style="display:flex;flex-wrap:wrap;gap:15px;">
-    <div style="flex:1;min-width:200px;padding:18px;border-radius:12px;background:rgba(80,130,220,0.12);">
-      <h3>📊 Attendance Tracker</h3>
-      <p>Calculate and monitor your attendance.</p>
-      <button onclick="show('attendance')">Open Attendance</button>
+    <p style="letter-spacing:3px;color:#82b4ff;font-size:11px;">
+      EVERYTHING IN ONE PLACE
+    </p>
+
+    <h2 style="font-size:28px;">Explore Campus Services</h2>
+
+    <div style="display:flex;flex-wrap:wrap;gap:15px;">
+
+      <div style="flex:1;min-width:210px;padding:20px;border-radius:15px;background:#1b2e4e;">
+        <h3>📊 Attendance</h3>
+        <p>Track your attendance percentage easily.</p>
+        <button onclick="show('attendance')">OPEN ATTENDANCE →</button>
+      </div>
+
+      <div style="flex:1;min-width:210px;padding:20px;border-radius:15px;background:#1b2e4e;">
+        <h3>🔎 Lost & Found</h3>
+        <p>Report lost items and discover found items.</p>
+        <button onclick="show('lost')">OPEN LOST & FOUND →</button>
+      </div>
+
     </div>
 
-    <div style="flex:1;min-width:200px;padding:18px;border-radius:12px;background:rgba(80,130,220,0.12);">
-      <h3>🔎 Lost & Found</h3>
-      <p>Report lost items and check found items.</p>
-      <button onclick="show('lost')">Open Lost & Found</button>
-    </div>
+    <p style="margin-top:25px;font-size:12px;color:#9aaecb;">
+      Independent student project — not an official college service.
+    </p>
+
   </div>
-
-  <p style="margin-top:22px;font-size:12px;opacity:0.7;">
-    Independent student project — not an official college service.
-  </p>
 </section>
 
 <section id="attendance" class="card hidden">
