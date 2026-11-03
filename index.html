@@ -21,6 +21,110 @@ input,select,textarea{width:100%;padding:12px;margin:8px 0 15px;border:1px solid
 small{color:#68768a}
 .hidden{display:none}
 </style>
+<style>
+:root {
+  --blue: #3985ff;
+  --cyan: #42d5f5;
+}
+
+body {
+  background: radial-gradient(ellipse at top, #172c50, #080e1c 65%) !important;
+  color: #edf4ff !important;
+  font-family: "Segoe UI", Arial, sans-serif !important;
+}
+
+header {
+  background: linear-gradient(135deg, #101d38, #173b70) !important;
+  padding: 35px 18px !important;
+  border-bottom: 1px solid #ffffff20;
+  box-shadow: 0 8px 35px #0005;
+}
+
+header h1 {
+  font-size: clamp(25px, 5vw, 36px) !important;
+  letter-spacing: -1px;
+}
+
+header p {
+  color: #c5d9f8 !important;
+}
+
+nav {
+  gap: 12px !important;
+  padding: 22px 12px !important;
+}
+
+button {
+  background: linear-gradient(135deg, #2671e9, #4055dc) !important;
+  color: white !important;
+  border: 1px solid #5b9aff55 !important;
+  border-radius: 12px !important;
+  padding: 13px 21px !important;
+  box-shadow: 0 5px 18px #2563eb30;
+  transition: 0.25s;
+}
+
+button:hover {
+  transform: translateY(-2px);
+}
+
+main {
+  max-width: 950px !important;
+  margin: 20px auto !important;
+  padding: 15px !important;
+}
+
+.card {
+  background: linear-gradient(145deg, #182843, #0e192c) !important;
+  color: #edf4ff !important;
+  border: 1px solid #94b2dc29 !important;
+  border-radius: 20px !important;
+  padding: 27px !important;
+  box-shadow: 0 12px 35px #0005 !important;
+}
+
+h2 {
+  color: #f4f8ff !important;
+}
+
+p, li, label {
+  color: #c4d1e5 !important;
+}
+
+input, select, textarea {
+  background: #0b1629 !important;
+  color: white !important;
+  border: 1px solid #94b2dc35 !important;
+  border-radius: 11px !important;
+  padding: 14px !important;
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: #3985ff !important;
+  outline: none;
+}
+
+.item {
+  background: #0c192d !important;
+  color: #e5efff !important;
+  border: 1px solid #94b2dc29 !important;
+  border-radius: 12px !important;
+  padding: 15px !important;
+}
+
+small {
+  color: #9aabc4 !important;
+}
+
+@media(max-width:600px) {
+  .card {
+    padding: 21px !important;
+  }
+  nav button {
+    padding: 12px 15px !important;
+  }
+}
+</style>
 </head>
 <body>
 <header>
