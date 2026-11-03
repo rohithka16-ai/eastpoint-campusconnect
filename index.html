@@ -1,0 +1,118 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EastPoint CampusConnect</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#f2f5fb;color:#172747}
+header{background:#142b50;color:white;padding:22px;text-align:center}
+header h1{margin:0;font-size:25px}
+header p{margin:7px 0 0;font-size:13px}
+nav{display:flex;justify-content:center;gap:10px;padding:15px;flex-wrap:wrap}
+button{border:0;border-radius:8px;padding:12px 18px;background:#245fe5;color:white;font-weight:bold;cursor:pointer}
+main{max-width:850px;margin:15px auto;padding:15px}
+.card{background:white;padding:20px;border-radius:14px;margin-bottom:16px;box-shadow:0 3px 15px #0000000c}
+h2{margin-top:0}
+input,select,textarea{width:100%;padding:12px;margin:8px 0 15px;border:1px solid #ccd4e1;border-radius:8px}
+.item{border:1px solid #ddd;padding:12px;border-radius:9px;margin-top:10px}
+small{color:#68768a}
+.hidden{display:none}
+</style>
+</head>
+<body>
+<header>
+<h1>EastPoint CampusConnect</h1>
+<p>East Point College of Engineering and Technology</p>
+</header>
+<nav>
+<button onclick="show('home')">Home</button>
+<button onclick="show('attendance')">Attendance</button>
+<button onclick="show('lost')">Lost & Found</button>
+</nav>
+<main>
+<section id="home" class="card">
+<h2>Welcome to CampusConnect 👋</h2>
+<p>A student utility portal designed to make campus life easier.</p>
+<p>Our services:</p>
+<ul>
+<li>Student attendance tracking</li>
+<li>Lost and found item reporting</li>
+<li>Easy access to campus information</li>
+</ul>
+</section>
+
+<section id="attendance" class="card hidden">
+<h2>Student Attendance</h2>
+<label>Subject</label>
+<select id="subject">
+<option>Mathematics</option>
+<option>Physics</option>
+<option>Programming in C</option>
+<option>Engineering Chemistry</option>
+</select>
+<label>Total classes</label>
+<input type="number" id="total" min="1" placeholder="Enter total classes">
+<label>Classes attended</label>
+<input type="number" id="attended" min="0" placeholder="Enter attended classes">
+<button onclick="calculate()">Calculate Attendance</button>
+<h3 id="result"></h3>
+</section>
+
+<section id="lost" class="card hidden">
+<h2>Lost & Found Portal</h2>
+<label>Item name</label>
+<input id="item" placeholder="Example: College ID card">
+<label>Category</label>
+<select id="category">
+<option>Books and Notes</option>
+<option>ID Card</option>
+<option>Electronics</option>
+<option>Water Bottle</option>
+<option>Other</option>
+</select>
+<label>Location</label>
+<input id="location" placeholder="Where was it lost or found?">
+<label>Type</label>
+<select id="type">
+<option>Lost</option>
+<option>Found</option>
+</select>
+<button onclick="addItem()">Post Item</button>
+<h3>Recent Reports</h3>
+<div id="items"></div>
+</section>
+</main>
+<script>
+function show(id){
+document.querySelectorAll('main section').forEach(s=>s.classList.add('hidden'));
+document.getElementById(id).classList.remove('hidden');
+}
+function calculate(){
+let total=Number(document.getElementById('total').value);
+let attended=Number(document.getElementById('attended').value);
+if(!Number.isInteger(total)||!Number.isInteger(attended)||total<=0||attended<0||attended>total){
+alert('Please enter valid attendance numbers.');
+return;
+}
+let percentage=Math.round(attended/total*100);
+document.getElementById('result').textContent='Attendance: '+percentage+'%';
+}
+function addItem(){
+let name=document.getElementById('item').value.trim();
+let category=document.getElementById('category').value;
+let location=document.getElementById('location').value.trim();
+let type=document.getElementById('type').value;
+if(!name||!location){alert('Please enter item name and location.');return;}
+let div=document.createElement('div');
+div.className='item';
+div.textContent=type+' | '+name+' | '+category+' | '+location;
+document.getElementById('items').prepend(div);
+document.getElementById('item').value='';
+document.getElementById('location').value='';
+}
+</script>
+</body>
+</html>
