@@ -351,7 +351,7 @@ function calculate(){
     return;
   }
 
-  let percentage = Math.round(attended / total * 100);
+  let percentage = (attended/total*100).tofixed(2);
 
   document.getElementById('result').textContent =
     'Your Attendance: ' + percentage + '%';
