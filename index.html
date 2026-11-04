@@ -21,7 +21,23 @@ h2{margin-top:0}
 input,select,textarea{width:100%;padding:12px;margin:8px 0 15px;border:1px solid #ccd4e1;border-radius:8px}
 .item{border:1px solid #ddd;padding:12px;border-radius:9px;margin-top:10px}
 small{color:#68768a}
-.hidden{display:none}
+.hidden{display:none}/* STUDENT LOGIN FIRST */
+body.auth-locked #intro-screen {
+  display: none !important;
+}
+
+body.auth-locked header,
+body.auth-locked nav {
+  display: none !important;
+}
+
+body.auth-locked main section:not(#student-login) {
+  display: none !important;
+}
+
+body.auth-locked main #student-login {
+  display: block !important;
+}
 </style>
 <style>
 /* CINEMATIC CAMPUSCONNECT INTRO */
@@ -199,7 +215,7 @@ small {
 }
 </style>
 </head>
-<body>
+<body class="auth-locked">
   <div id="intro-screen">
   <img src="https://epcet.edu.in/wp-content/uploads/2023/09/epcetwhite.png"
        alt="East Point Logo">
@@ -623,14 +639,26 @@ function authMessage(message, error = false) {
   el.style.color = error ? "#ff7777" : "#7ee6a3";
 }
 
+
+let currentSession = null;
+
 function updateLoginStatus(session) {
+  currentSession = session;
+
   document.getElementById("student-auth-status").textContent =
     session ? "Logged in as " + session.user.email : "You are not signed in.";
 
   document.getElementById("student-logout").style.display =
     session ? "inline-block" : "none";
-}
 
+  document.body.classList.toggle("auth-locked", !session);
+
+  if (session) {
+    show("home");
+  } else {
+    show("student-login");
+  }
+}
 async function studentSignUp() {
   const email = document.getElementById("student-email").value.trim();
   const password = document.getElementById("student-password").value;
@@ -690,9 +718,13 @@ supabaseClient.auth.getSession().then(({ data }) => {
 supabaseClient.auth.onAuthStateChange((_event, session) => {
   updateLoginStatus(session);
 });
-function show(id){
-document.querySelectorAll('main section').forEach(s=>s.classList.add('hidden'));
-document.getElementById(id).classList.remove('hidden');
+function show(id) {
+  if (!currentSession && id !== "student-login") {
+    id = "student-login";
+  }
+
+  document.querySelectorAll('main section').forEach(s => s.classList.add('hidden'));
+  document.getElementById(id).classList.remove('hidden');
 }
 function calculate(){
 
