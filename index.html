@@ -801,9 +801,12 @@ async function studentSignUp() {
   authMessage("Creating account...");
 
   const { data, error } = await supabaseClient.auth.signUp({
-    email: email,
-    password: password
-  });
+  email: email,
+  password: password,
+  options: {
+    emailRedirectTo: "https://rohithka16-ai.github.io/eastpoint-campusconnect/"
+  }
+});
 
   if (error) return authMessage(error.message, true);
 
