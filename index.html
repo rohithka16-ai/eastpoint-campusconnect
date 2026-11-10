@@ -307,7 +307,53 @@ style="width:280px;max-width:85%;height:auto;margin-bottom:12px;"><h1>EastPoint 
 </nav>
 <main>
 <section id="home" class="card" style="padding:0;overflow:hidden;">
+<!-- STUDENT DASHBOARD -->
+<div id="student-dashboard" style="padding:24px 20px;background:#081426;">
 
+  <div style="margin-bottom:20px;">
+    <p style="color:#70aaff;font-size:12px;letter-spacing:2px;margin:0;">
+      STUDENT DASHBOARD
+    </p>
+    <h2 style="margin:8px 0;font-size:28px;">
+      Welcome back 👋
+    </h2>
+    <p id="dashboard-email" style="color:#a9c5ed;margin:0;">
+      Student
+    </p>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px;">
+
+    <div style="background:#13294a;padding:18px;border-radius:16px;border:1px solid #29466d;">
+      <div style="font-size:28px;">📊</div>
+      <h3 style="margin:8px 0;">Attendance</h3>
+      <p style="color:#a9c5ed;margin:0;">Track your attendance</p>
+      <button onclick="show('attendance')">VIEW →</button>
+    </div>
+
+    <div style="background:#13294a;padding:18px;border-radius:16px;border:1px solid #29466d;">
+      <div style="font-size:28px;">📚</div>
+      <h3 style="margin:8px 0;">Assignments</h3>
+      <p style="color:#a9c5ed;margin:0;">Check your assignments</p>
+      <button onclick="show('assignments')">VIEW →</button>
+    </div>
+
+    <div style="background:#13294a;padding:18px;border-radius:16px;border:1px solid #29466d;">
+      <div style="font-size:28px;">🗓️</div>
+      <h3 style="margin:8px 0;">Timetable</h3>
+      <p style="color:#a9c5ed;margin:0;">View your classes</p>
+      <button onclick="show('timetable')">VIEW →</button>
+    </div>
+
+    <div style="background:#13294a;padding:18px;border-radius:16px;border:1px solid #29466d;">
+      <div style="font-size:28px;">🎓</div>
+      <h3 style="margin:8px 0;">SGPA</h3>
+      <p style="color:#a9c5ed;margin:0;">Calculate your SGPA</p>
+      <button onclick="show('cgpa')">CALCULATE →</button>
+    </div>
+
+  </div>
+</div>
   <!-- CINEMATIC HERO -->
   <div style="position:relative;min-height:470px;display:flex;align-items:flex-end;overflow:hidden;border-radius:18px;background:#061329;">
 
