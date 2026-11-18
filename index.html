@@ -704,42 +704,7 @@ style="width:280px;max-width:85%;height:auto;margin-bottom:12px;"><h1>EastPoint 
 <button onclick="copyFeedback()">COPY FEEDBACK</button>
 <p id="fb-result"></p>
 </section>
-<section id="student-login" class="card hidden">
 
-  <img src="https://epcet.edu.in/wp-content/uploads/2023/09/epcetwhite.png"
-       alt="East Point Logo"
-       style="width:110px;display:block;margin:0 auto 22px;">
-
-  <h2>🎓 Welcome to CampusConnect</h2>
-  <p>Your campus. Your connections. Your journey.</p>
-
-  <h3 style="text-align:center;color:#72aaff;">
-    STUDENT PORTAL
-  </h3>
-
-  <p id="student-auth-status">You are not signed in.</p>
-
-  <label>Email address</label>
-  <input id="student-email" type="email"
-         placeholder="Enter your email">
-
-  <label>Password</label>
-  <input id="student-password" type="password"
-         placeholder="Minimum 8 characters">
-
-  <button type="button" onclick="toggleStudentPassword()">
-    SHOW PASSWORD
-  </button>
-
-  <button onclick="studentSignUp()">CREATE ACCOUNT</button>
-  <button onclick="studentSignIn()">LOGIN</button>
-
-  <button id="student-logout" onclick="studentSignOut()"
-          style="display:none;">LOGOUT</button>
-
-  <p id="student-auth-message"></p>
-
-</section>
 </main>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
@@ -765,31 +730,19 @@ function toggleStudentPassword() {
   }
 }
 function authMessage(message, error = false) {
-  const el = document.getElementById("student-auth-message");
-  el.textContent = message;
-  el.style.color = error ? "#ff7777" : "#7ee6a3";
+  console.log(message);
 }
-
 
 let currentSession = null;
 
 function updateLoginStatus(session) {
   currentSession = session;
 
-  document.getElementById("student-auth-status").textContent =
-    session ? "Logged in as " + session.user.email : "You are not signed in.";
-
-  document.getElementById("student-logout").style.display =
-    session ? "inline-block" : "none";
-
-  document.body.classList.toggle("auth-locked", !session);
-
   if (session) {
     show("home");
-  } else {
-    show("student-login");
   }
 }
+
 async function studentSignUp() {
   const email = document.getElementById("student-email").value.trim();
   const password = document.getElementById("student-password").value;
@@ -853,12 +806,11 @@ supabaseClient.auth.onAuthStateChange((_event, session) => {
   updateLoginStatus(session);
 });
 function show(id) {
-  if (!currentSession && id !== "student-login") {
-    id = "student-login";
-  }
-
   document.querySelectorAll('main section').forEach(s => s.classList.add('hidden'));
-  document.getElementById(id).classList.remove('hidden');
+  const section = document.getElementById(id);
+  if (section) {
+    section.classList.remove('hidden');
+  }
 }
 function calculate(){
 
