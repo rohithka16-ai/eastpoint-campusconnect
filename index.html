@@ -1503,6 +1503,47 @@ featureRender("cc-events", "ev-list",
   #campus-pet {
     bottom: 12px;
   }
+  #theme-toggle {
+  position: fixed;
+  top: 18px;
+  right: 18px;
+  z-index: 9999;
+  width: 46px;
+  height: 46px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(20, 35, 60, 0.9);
+  color: white;
+  font-size: 21px;
+  cursor: pointer;
+  box-shadow: 0 5px 20px rgba(0,0,0,.25);
+}
+  body.light-mode {
+  background: #f4f7fb;
+  color: #172033;
+}
+
+body.light-mode .card {
+  background: #ffffff;
+  color: #172033;
+}
+
+body.light-mode input,
+body.light-mode textarea,
+body.light-mode select {
+  background: #ffffff;
+  color: #172033;
+  border-color: #cbd5e1;
+}
+
+body.light-mode .item {
+  background: #f8fafc;
+  color: #172033;
+}
+
+body.light-mode header {
+  background: #ffffff;
+}
 </style>
 
 <script>
@@ -1513,7 +1554,23 @@ const petMessages = [
   "Lost something? Try Lost & Found!",
   "Have a great day on campus! 🎒"
 ];
+function toggleTheme() {
+  document.body.classList.toggle("light-mode");
 
+  const button = document.getElementById("theme-toggle");
+
+  if (document.body.classList.contains("light-mode")) {
+    button.textContent = "☀️";
+    localStorage.setItem("campus-theme", "light");
+  } else {
+    button.textContent = "🌙";
+    localStorage.setItem("campus-theme", "dark");
+  }
+}
+
+if (localStorage.getItem("campus-theme") === "light") {
+  document.body.classList.add("light-mode");
+}
 const campusPet = document.getElementById("campus-pet");
 const petMessage = document.getElementById("pet-message");
 
@@ -1530,5 +1587,6 @@ if (campusPet && petMessage) {
   });
 }
 </script>
+  <button id="theme-toggle" onclick="toggleTheme()">🌙</button>
 </body>
 </html>
