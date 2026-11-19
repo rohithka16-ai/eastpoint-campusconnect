@@ -1108,6 +1108,7 @@ supabaseClient.auth.onAuthStateChange((_event, session) => {
     }, 0);
   }
 });
+  function closeIntro() {
   const intro = document.getElementById('intro-screen');
 
   if (intro) {
@@ -1117,6 +1118,8 @@ supabaseClient.auth.onAuthStateChange((_event, session) => {
       intro.remove();
     }, 1000);
   }
+
+  document.body.classList.remove('auth-locked');
 }
 
 setTimeout(closeIntro, 3000);
