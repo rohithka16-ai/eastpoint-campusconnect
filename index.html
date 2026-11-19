@@ -1554,6 +1554,23 @@ const petMessages = [
   "Lost something? Try Lost & Found!",
   "Have a great day on campus! 🎒"
 ];
+
+const campusPet = document.getElementById("campus-pet");
+const petMessage = document.getElementById("pet-message");
+
+if (campusPet && petMessage) {
+  campusPet.addEventListener("click", () => {
+    petMessage.textContent =
+      petMessages[Math.floor(Math.random() * petMessages.length)];
+
+    petMessage.style.opacity = "1";
+
+    setTimeout(() => {
+      petMessage.style.opacity = "0";
+    }, 2500);
+  });
+}
+  
 function toggleTheme() {
   document.body.classList.toggle("light-mode");
 
@@ -1570,22 +1587,9 @@ function toggleTheme() {
 
 if (localStorage.getItem("campus-theme") === "light") {
   document.body.classList.add("light-mode");
+  document.getElementById("theme-toggle").textContent = "☀️";
 }
-const campusPet = document.getElementById("campus-pet");
-const petMessage = document.getElementById("pet-message");
 
-if (campusPet && petMessage) {
-  campusPet.addEventListener("click", () => {
-    petMessage.textContent =
-      petMessages[Math.floor(Math.random() * petMessages.length)];
-
-    petMessage.style.opacity = "1";
-
-    setTimeout(() => {
-      petMessage.style.opacity = "0";
-    }, 2500);
-  });
-}
 </script>
   <button id="theme-toggle" onclick="toggleTheme()">🌙</button>
 </body>
