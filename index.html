@@ -689,7 +689,49 @@ style="width:280px;max-width:85%;height:auto;margin-bottom:12px;"><h1>EastPoint 
 <button onclick="copyFeedback()">COPY FEEDBACK</button>
 <p id="fb-result"></p>
 </section>
+<section id="student-login" class="card hidden">
 
+  <h2>🎓 Student Login</h2>
+
+  <p>
+    Login to access student features and your Lost & Found reports.
+  </p>
+
+  <label>Student Email</label>
+  <input
+    type="email"
+    id="student-email"
+    placeholder="Enter your email"
+  >
+
+  <label>Password</label>
+  <input
+    type="password"
+    id="student-password"
+    placeholder="Enter your password"
+  >
+
+  <button onclick="studentSignIn()">
+    LOGIN
+  </button>
+
+  <button
+    onclick="toggleStudentPassword()"
+    style="background:#334d75;"
+  >
+    SHOW PASSWORD
+  </button>
+
+  <button
+    onclick="studentSignUp()"
+    style="background:#1b8f5a;"
+  >
+    CREATE ACCOUNT
+  </button>
+
+  <p id="auth-message" style="margin-top:15px;"></p>
+
+</section>
 </main>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
@@ -715,6 +757,13 @@ function toggleStudentPassword() {
   }
 }
 function authMessage(message, error = false) {
+  const box = document.getElementById("auth-message");
+
+  if (box) {
+    box.textContent = message;
+    box.style.color = error ? "#ff8b8b" : "#7ee2a8";
+  }
+
   console.log(message);
 }
 
