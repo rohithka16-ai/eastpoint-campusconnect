@@ -1412,5 +1412,123 @@ featureRender("cc-grades", "sg-list",
 featureRender("cc-events", "ev-list",
   x => `${x.name} | ${x.date} | ${x.venue}`);
 </script>
+  
+  <!-- CAMPUSCONNECT PET -->
+<div id="campus-pet">
+  <div id="pet-message">Welcome to CampusConnect! 🐹</div>
+  <div id="pet">🐹🎒</div>
+</div>
+
+<style>
+#campus-pet {
+  position: fixed;
+  left: -100px;
+  bottom: 18px;
+  z-index: 9998;
+  pointer-events: none;
+  animation: petWalk 22s linear infinite;
+}
+
+#pet {
+  font-size: 42px;
+  filter: drop-shadow(0 5px 5px rgba(0,0,0,.35));
+  animation: petBounce .55s ease-in-out infinite alternate;
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+#pet-message {
+  position: absolute;
+  bottom: 58px;
+  left: 0;
+  width: 190px;
+  padding: 9px 12px;
+  border-radius: 14px;
+  background: rgba(8,20,38,.94);
+  color: white;
+  font-size: 12px;
+  text-align: center;
+  border: 1px solid rgba(112,170,255,.4);
+  box-shadow: 0 8px 25px rgba(0,0,0,.3);
+  opacity: 0;
+  transition: opacity .3s ease;
+}
+
+#campus-pet:hover #pet-message {
+  opacity: 1;
+}
+
+@keyframes petWalk {
+  0% {
+    left: -100px;
+  }
+
+  45% {
+    left: 42%;
+  }
+
+  50% {
+    left: 48%;
+  }
+
+  55% {
+    left: 54%;
+  }
+
+  100% {
+    left: calc(100% + 100px);
+  }
+}
+
+@keyframes petBounce {
+  from {
+    transform: translateY(0) rotate(-2deg);
+  }
+
+  to {
+    transform: translateY(-5px) rotate(2deg);
+  }
+}
+
+@media (max-width: 600px) {
+  #pet {
+    font-size: 34px;
+  }
+
+  #pet-message {
+    width: 150px;
+    font-size: 11px;
+  }
+
+  #campus-pet {
+    bottom: 12px;
+  }
+</style>
+
+<script>
+const petMessages = [
+  "Welcome to CampusConnect! 🐹",
+  "Have you checked your timetable?",
+  "Don't forget your assignments! 📚",
+  "Lost something? Try Lost & Found!",
+  "Have a great day on campus! 🎒"
+];
+
+const campusPet = document.getElementById("campus-pet");
+const petMessage = document.getElementById("pet-message");
+
+if (campusPet && petMessage) {
+  campusPet.addEventListener("click", () => {
+    petMessage.textContent =
+      petMessages[Math.floor(Math.random() * petMessages.length)];
+
+    petMessage.style.opacity = "1";
+
+    setTimeout(() => {
+      petMessage.style.opacity = "0";
+    }, 2500);
+  });
+}
+</script>
 </body>
 </html>
